@@ -2,6 +2,8 @@ import {addRoom ,removeRoom} from "./core.js"
 
 
 
+//处理 action 的 reducer 函数
+
 export default function reducer (state,action) {
 
     switch(action.type){

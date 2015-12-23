@@ -1,11 +1,12 @@
 import {fromJS, Map, List} from "immutable"
 import {v1} from "uuid"
 
-
+// 初始的 state 信息
 export const INITAL_STATE = fromJS({
     rooms: [],
 })
 
+// 添加 房间
 export function addRoom(state = INITAL_STATE, room) {
     if (!room || !room.owner) return state
 
@@ -16,7 +17,7 @@ export function addRoom(state = INITAL_STATE, room) {
     })))
 }
 
-
+// 删除 房间
 export function removeRoom(state,{id,user}){
 
     const rooms=state.get("rooms")

@@ -19,11 +19,11 @@ it('render roomlist', () => {
     const rooms = fromJS([{
         id: "0",
         name: "room",
-        owner: "eisneim"
+        owner: "hqman"
     }, {
         id: "1",
         name: "room2",
-        owner: "terry"
+        owner: "jing"
     }, ])
 
     const component = renderIntoDocument( < RoomList rooms = {

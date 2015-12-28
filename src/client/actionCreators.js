@@ -28,7 +28,7 @@ export function newMessage ({roomId,content,user,time},isFromServer) {
         message:{
         roomId,content:content||"",user,time:yymmddhhmm
         },
-        meta:{remote:isFromServer}
+        meta:{remote:!isFromServer}
     }
 }
 

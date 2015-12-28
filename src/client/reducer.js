@@ -11,6 +11,7 @@ export default function rootReducer(state = Map(), action) {
             return state.set("username", action.username)
 
         case "SWITCH_ROOM":
+            console.log("SWITCH_ROOM >>>>>")
             return state.set("currentRoom", action.roomId)
         case "NEW_MESSAGE":
 

@@ -2,7 +2,7 @@ import React from "react"
 import MessageList from "./MessageList"
 import InputBox from "./InputBox"
 import RoomList from "./RoomList"
-
+import {switchRoom,addRoom,setState,newMessage ,removeRoom} from "../actionCreators"
 
 class App extends React.Component {
     getCurrentRoomName() {
@@ -19,22 +19,44 @@ class App extends React.Component {
     }
 
     getMessages() {
-        return this.props.messages ?
+        const ret=this.props.messages ?
             this.props.messages.get(this.props.currentRoom) : []
+            console.log("message >>>>>")
+            console.dir(ret);
+        return ret
     }
     addRoom() {
+        //发送到后台添加房间
+        var name = prompt("房间名称")
+        if(!name) return alert("房间名称不能为空")
+
+        this.props.dispatch(addRoom({
+            name,owner:this.props.username
+        }) )
 
     }
 
     removeRoom() {
+       this.props.dispatch(switchRoom( ))
+
+        this.props.dispatch( removeRoom(
+            this.props.currentRoom, this.props.username
+        ) )
 
     }
 
     sendMessage(message) {
+        this.props.dispatch(newMessage(
+             {
+            roomId: this.props.currentRoom,
+            user: this.props.username,
+            content: message
 
+            }
+         ))
     }
     render() {
-        const { currentRoom, rooms, username } = this.props
+        const { currentRoom, rooms, username,dispatch } = this.props
 
         return (
             <div className="flex-row">
@@ -70,5 +92,18 @@ class App extends React.Component {
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import reactMixin from "react-mixin";
 reactMixin.onClass(App, PureRenderMixin)
+
+import { connect } from 'react-redux'
+function mapStateToProps ( state ){
+    return {
+        rooms:  state.get("rooms"),
+        currentRoom: state.get("currentRoom"),
+        username: state.get("username"),
+        messages: state.get("messages")
+    }
+}
+
+export const ConnectedApp = connect(mapStateToProps)(App)
+
 
 export default App

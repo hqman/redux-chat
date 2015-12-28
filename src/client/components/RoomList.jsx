@@ -16,7 +16,10 @@ class RoomList extends Component {
                 rooms.map((room,index)=>{
                     return (
                         <a className={this.isActive(room,currentRoom)?"active":""}
+                        //设置 点击事件 切换房间
+                        onClick={ e=>this.props.switchRoom(room.get("id")) }
                             key={index} href="#">
+
                             {room.get("name")}
                         </a>
                     )
